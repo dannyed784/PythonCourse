@@ -1,6 +1,16 @@
 # DAY 7 HANGMAN
 import random
+print(r"""
+ _                                             
+| |                                            
+| |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  
+| '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ 
+| | | | (_| | | | | (_| | | | | | | (_| | | | |
+|_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
+                    __/ |                      
+                   |___/       
 
+""")
 # create a list of words and define variables
 listWords = ["Canada","Sweden","USA","Cuba","Colombia","France","Maroc",
              "Spain","Japan","China","Russia","Philippines","Australia","England",
@@ -31,7 +41,7 @@ hangman2 = r"""
  _______________
      |/      |
      |      (_)
-     |       |
+     |      /|\
      |       
      |      
      |
@@ -42,8 +52,8 @@ hangman3 = r"""
  _______________
      |/      |
      |      (_)
-     |      \|/
-     |       
+     |      /|\
+     |       |
      |      
      |
  ___|___
@@ -54,7 +64,7 @@ hangman4 = r"""
      |      (_)
      |      \|/
      |       |
-     |      
+     |      / 
      |
  ____|___
 """
@@ -68,60 +78,63 @@ hangman5 = r"""
      |
  ____|___
 """
-
-#Create a variable call life
 life = 5
-#Chose a random country of the list
-country = random.choice(listWords)
-print(country)
+wordPlayer=""
+
+#Chose a random country(or word) of the list
+country = random.choice(listWords).upper()
+# print(country)
 
 #Create the empty spaces for the player
 wordSelected = list(country)
 wordEmpty = []
-print(wordSelected)
+# print(wordSelected)
 
 for emptySpace in range(len(wordSelected)):
     wordEmpty.append("_")
 wordToGuess = " ".join(wordEmpty)
-print(wordEmpty)
+# print(wordEmpty)
 
-
-# Ask the player to select a letter
-wordPlayerList = []
-while life >= 0:
+# Ask player to select a letter
+# wordPlayerList = []
+while life > 0:
       if life == 5:
           print(hangman0)
-          print("".join(wordEmpty))
       elif life == 4:
           print(hangman1)
-          print("".join(wordEmpty))
       elif life == 3:
           print(hangman2)
-          print("".join(wordEmpty))
       elif life == 2:
           print(hangman3)
-          print("".join(wordEmpty))
       elif life == 1:
           print(hangman4)
-          print("".join(wordEmpty))
       elif life == 0:
           print(hangman5)
-          print("".join(wordEmpty))
 
-      wordPlayer = input("Guess a letter: ")
+      print("".join(wordEmpty))
+
+      #Check if the player has won
+      if "_" not in wordEmpty:
+          print("CONGRATULATION YOU WIN!!")
+          break
+
+      wordPlayer = input("Guess a letter: ").upper()
       # logic to compare wordPlayerList to wordSelected
       if wordPlayer in wordSelected:
-        print("Yes")
+        print(f"attempts left: {life}")
         for index in range(len(wordSelected)):
             if wordSelected[index] == wordPlayer:
                 wordEmpty[index] = wordPlayer
       else:
-        print("No")
         life -= 1
+        print(f"attempts left {life}")
 
-print("GAME OVER YOU LOSE")
-# print(wordEmpty)
-# print("".join(wordEmpty))
+if life == 0:
+    print(hangman5)
+    print("******GAME OVER YOU LOSE*****8")
+    print("".join(wordEmpty))
+    print(f"The word was {country} ")
+
 
 
 
