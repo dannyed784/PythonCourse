@@ -1,5 +1,6 @@
 # DAY 7 HANGMAN
 import random
+import hangman_words
 print(r"""
  _                                             
 | |                                            
@@ -12,10 +13,7 @@ print(r"""
 
 """)
 # create a list of words and define variables
-listWords = ["Canada","Sweden","USA","Cuba","Colombia","France","Maroc",
-             "Spain","Japan","China","Russia","Philippines","Australia","England",
-             "Chile","Mexico","Poland","Germany","Italy","Mali","Egypt",
-             "Greece","Thailand","Costa Rica","South Korea","New Zeeland","Iceland"]
+
 
 hangman0 = r"""
  _______________
@@ -71,8 +69,8 @@ hangman4 = r"""
 hangman5 = r"""
  _______________
      |/      |
-     |      (_)
-     |      \|/
+     |      (u)
+     |      /|\
      |       |
      |      / |
      |
@@ -81,8 +79,8 @@ hangman5 = r"""
 life = 5
 wordPlayer=""
 
-#Chose a random country(or word) of the list
-country = random.choice(listWords).upper()
+#Chose a random country(from module hangman_words) of the list
+country = random.choice(hangman_words.listWords).upper()
 # print(country)
 
 #Create the empty spaces for the player
@@ -131,7 +129,7 @@ while life > 0:
 
 if life == 0:
     print(hangman5)
-    print("******GAME OVER YOU LOSE*****8")
+    print("******GAME OVER YOU LOSE*****")
     print("".join(wordEmpty))
     print(f"The word was {country} ")
 
